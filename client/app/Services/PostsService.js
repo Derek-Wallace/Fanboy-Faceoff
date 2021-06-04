@@ -1,4 +1,4 @@
-import { logger } from '../Utils/Logger.js'
+import { ProxyState } from '../AppState.js'
 
 // eslint-disable-next-line no-undef
 const url = axios.create({
@@ -7,12 +7,12 @@ const url = axios.create({
 class PostsService {
   async getPosts() {
     const res = await url.get('posts')
-    logger.log(res.data)
+    ProxyState.posts.push(res.data)
   }
 
   async createPost(formData) {
     const res = await url.post('posts', formData)
-    logger.log(res.data)
+    ProxyState.posts.push(res.data)
   }
 }
 export const postsService = new PostsService()
