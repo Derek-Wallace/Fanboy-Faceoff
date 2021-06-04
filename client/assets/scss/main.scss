@@ -15,5 +15,20 @@ main {
   flex-grow: 1;
 }
 
+.fab {
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+  z-index: 9
+}
+
+.title-bang{
+  font-family: 'Bangers', cursive;
+  text-shadow: 5px 5px red;
+}
+
+.text-norm{
+  font-family: 'Inter', sans-serif;
+}
 
 

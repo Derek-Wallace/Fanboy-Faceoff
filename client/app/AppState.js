@@ -7,10 +7,11 @@ class AppState extends EventEmitter {
   account = {}
   socketData = []
 
-  /**@type {Post[]} */
-  posts = [ {imgUrl: 'https://cdn.britannica.com/s:800x450,c:crop/26/187026-138-00A23A77/science-fiction-powers-Marvel-Comics-Avengers.jpg',
-title: 'rip'
-} ]
+  /** @type {Post[]} */
+  posts = [{
+    imgUrl: 'https://cdn.britannica.com/s:800x450,c:crop/26/187026-138-00A23A77/science-fiction-powers-Marvel-Comics-Avengers.jpg',
+    title: 'rip'
+  }]
 }
 
 export const ProxyState = new Proxy(new AppState(), {
