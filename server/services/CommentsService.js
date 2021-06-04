@@ -16,8 +16,3 @@ class CommentsService {
 }
 
 export const commentsService = new CommentsService()
-
-// async updatePost(id, postData) {
-//   const post = await dbContext.Posts.findByIdAndUpdate(id, postData, { new: true, runValidators: true })
-//   return post
-// }
