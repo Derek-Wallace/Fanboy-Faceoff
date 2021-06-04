@@ -13,6 +13,11 @@ class CommentsService {
   async deleteComment(id) {
     return await dbContext.Comments.findByIdAndDelete(id)
   }
+
+  async updateComment(id, commentData) {
+    const comment = await dbContext.Comments.findByIdAndUpdate(id, commentData, { new: true, runValidators: true })
+    return comment
+  }
 }
 
 export const commentsService = new CommentsService()
