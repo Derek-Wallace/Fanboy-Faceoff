@@ -1,5 +1,5 @@
 import { ProxyState } from '../AppState.js'
-import { postservice } from '../Services/PostService.js'
+import { postsService } from '../Services/postsService.js'
 
 function draw() {
   let template = ''
@@ -12,7 +12,7 @@ function draw() {
       <img src="${p.imgUrl}" alt="" style="object-fit: contain;"></div>
       <p class = "text-right">
       <h2>${p.title}</h2> 
-      <button class="btn text-right"><i class="fas fa-lg fa-arrow-up text-primary" onclick="app.postController.upVote('${p.id}')"></i></button> <button class="btn "><i class="fas fa-lg fa-arrow-down text-danger" onclick="app.postController.downVote('${p.id}')"></i></button></p>
+      <button class="btn text-right"><i class="fas fa-lg fa-arrow-up text-primary" onclick="app.postsController.upVote('${p.id}')"></i></button> <button class="btn "><i class="fas fa-lg fa-arrow-down text-danger" onclick="app.postsController.downVote('${p.id}')"></i></button></p>
       <p class= "text-right" id="${p.id}"> <i class="fas fa-lg fa-user-tie"> ${p.voteCount}</i></p>
     </div>
   </div>`
@@ -20,14 +20,14 @@ function draw() {
   document.getElementById('posts').innerHTML = template
 }
 
-export class PostController {
+export class PostsController {
   constructor() {
     ProxyState.on('posts', draw)
     this.getPosts()
   }
 
   getPosts() {
-    // postservice.getPosts()
+    postsService.getPosts()
     draw()
   }
 
