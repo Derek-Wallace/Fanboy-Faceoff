@@ -52,10 +52,11 @@ export class PostsController {
   }
 
   upVote(id) {
-    const post = ProxyState.posts.find(p => p.id == id)
+    const post = ProxyState.posts.find(p => p.id === id)
     post.voteCount += 1
-    draw()
     console.log('button worked', post.voteCount)
+    draw()
+    // document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-user-tie"> ${post.voteCount}</i></p>`
     if (post.voteCount >= 5) {
       document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-mask"> ${post.voteCount}</i></p>`
     } if (post.voteCount >= 10) {
@@ -66,11 +67,10 @@ export class PostsController {
   }
 
   downVote(id) {
-    const post = ProxyState.posts.find(p => p.id == id)
+    const post = ProxyState.posts.find(p => p.id === id)
     post.voteCount -= 1
-    draw()
     console.log('button worked', post.voteCount)
-
+    draw()
     if (post.voteCount <= -5) {
       document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-trash-alt"> ${post.voteCount}</i></p>`
     }
@@ -80,5 +80,6 @@ export class PostsController {
     if (post.voteCount <= -15) {
       document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-dumpster-fire"> ${post.voteCount}</i></p>`
     }
+    // document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-user-tie"> ${post.voteCount}</i></p>`
   }
 }
