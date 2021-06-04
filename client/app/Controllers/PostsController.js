@@ -19,6 +19,7 @@ function draw() {
   })
   document.getElementById('posts').innerHTML = template
 }
+
 export class PostController {
   constructor() {
     ProxyState.on('posts', draw)
