@@ -2,11 +2,6 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 
 class PostsService {
-  async find(query = {}) {
-    const posts = await dbContext.Posts.find(query)
-    return posts
-  }
-
   async findById(id) {
     const post = await dbContext.Posts.findById(id)
     if (!post) {
@@ -15,16 +10,25 @@ class PostsService {
     return post
   }
 
-  async createPost(postData){
+  async createPost(postData) {
     return await dbContext.Posts.create(postData)
   }
-  
-  async getPosts(query = {}){
-    return await dbContext.Posts.find(query)
+
+  async getAll() {
+    return await dbContext.Posts.find()
   }
 
-  async deletePost(id){
+  async getPost(postId) {
+    return await dbContext.Posts.findById(postId)
+  }
+
+  async deletePost(id) {
     return await dbContext.Posts.findByIdAndDelete(id)
+  }
+
+  async updatePost(id, postData) {
+    const post = await dbContext.Posts.findByIdAndUpdate(id, postData, { new: true, runValidators: true })
+    return post
   }
 }
 
