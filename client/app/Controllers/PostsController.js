@@ -13,7 +13,7 @@ function draw() {
       <p class = "text-right">
       <h2>${p.title}</h2> 
       <button class="btn text-right"><i class="fas fa-lg fa-arrow-up text-primary" onclick="app.postsController.upVote('${p.id}')"></i></button> <button class="btn "><i class="fas fa-lg fa-arrow-down text-danger" onclick="app.postsController.downVote('${p.id}')"></i></button></p>
-      <p class= "text-right" id="${p.id}"> <i class="fas fa-lg fa-user-tie"> ${p.voteCount}</i></p>
+      <p class= "text-right" id="${p.id}">${p.voteCount}</p>
     </div>
   </div>`
   })
@@ -32,10 +32,11 @@ export class PostsController {
   }
 
   upVote(id) {
-    const post = ProxyState.posts.find(p => p.id == id)
+    const post = ProxyState.posts.find(p => p.id === id)
     post.voteCount += 1
-    draw()
     console.log('button worked', post.voteCount)
+    draw()
+    // document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-user-tie"> ${post.voteCount}</i></p>`
     if (post.voteCount >= 5) {
       document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-mask"> ${post.voteCount}</i></p>`
     } if (post.voteCount >= 10) {
@@ -46,11 +47,10 @@ export class PostsController {
   }
 
   downVote(id) {
-    const post = ProxyState.posts.find(p => p.id == id)
+    const post = ProxyState.posts.find(p => p.id === id)
     post.voteCount -= 1
-    draw()
     console.log('button worked', post.voteCount)
-
+    draw()
     if (post.voteCount <= -5) {
       document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-trash-alt"> ${post.voteCount}</i></p>`
     }
@@ -60,5 +60,6 @@ export class PostsController {
     if (post.voteCount <= -15) {
       document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-dumpster-fire"> ${post.voteCount}</i></p>`
     }
+    // document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-user-tie"> ${post.voteCount}</i></p>`
   }
 }
