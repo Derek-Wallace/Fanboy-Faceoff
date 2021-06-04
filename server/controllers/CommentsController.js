@@ -10,7 +10,7 @@ export class CommentsController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.create)
       .delete('/:id', this.delete)
-      // .put('/:id', this.updatePost)
+      .put('/:id', this.updatePost)
   }
 
   async create(req, res, next) {
@@ -33,13 +33,13 @@ export class CommentsController extends BaseController {
     }
   }
 
-  // async updatePost(req, res, next) {
-  //   try {
-  //     const id = req.params.id
-  //     const post = await postsService.updatePost(id, req.body)
-  //     return res.send(post)
-  //   } catch (error) {
-  //     next(error)
-  //   }
-  // }
+  async updatePost(req, res, next) {
+    try {
+      const id = req.params.id
+      const comment = await commentsService.updateComment(id, req.body)
+      return res.send(comment)
+    } catch (error) {
+      next(error)
+    }
+  }
 }
