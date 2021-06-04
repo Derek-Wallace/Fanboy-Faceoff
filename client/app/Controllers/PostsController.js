@@ -1,10 +1,11 @@
-import { ProxyState } from "../AppState.js";
-import { postservice } from "../Services/PostService.js";
+import { ProxyState } from '../AppState.js'
+import { postservice } from '../Services/PostService.js'
 
 function draw() {
   let template = ''
-  ProxyState.posts.forEach(p => template +=
-    /*html*/ `
+  ProxyState.posts.forEach(p => {
+    template +=
+    /* html */ `
   <div class="card">
     <div class="card-header text-center">
       <div>
@@ -15,7 +16,7 @@ function draw() {
       <p class= "text-right" id="${p.id}"> <i class="fas fa-lg fa-user-tie"> ${p.voteCount}</i></p>
     </div>
   </div>`
-  )
+  })
   document.getElementById('posts').innerHTML = template
 }
 export class PostController {
@@ -23,37 +24,40 @@ export class PostController {
     ProxyState.on('posts', draw)
     this.getPosts()
   }
+
   getPosts() {
     // postservice.getPosts()
     draw()
   }
-  upVote(id){
-    let post = ProxyState.posts.find(p => p.id == id)
+
+  upVote(id) {
+    const post = ProxyState.posts.find(p => p.id == id)
     post.voteCount += 1
     draw()
     console.log('button worked', post.voteCount)
-    if(post.voteCount >= 5){
-      document.getElementById(id).innerHTML = /*html*/ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-mask"> ${post.voteCount}</i></p>`
-    }if(post.voteCount >= 10){
-      document.getElementById(id).innerHTML = /*html*/ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-meteor"> ${post.voteCount}</i></p>`
-    }if(post.voteCount >= 15){
-      document.getElementById(id).innerHTML = /*html*/ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-superpowers"> ${post.voteCount}</i></p>`
+    if (post.voteCount >= 5) {
+      document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-mask"> ${post.voteCount}</i></p>`
+    } if (post.voteCount >= 10) {
+      document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-meteor"> ${post.voteCount}</i></p>`
+    } if (post.voteCount >= 15) {
+      document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-superpowers"> ${post.voteCount}</i></p>`
     }
   }
-  downVote(id){
-    let post = ProxyState.posts.find(p => p.id == id)
+
+  downVote(id) {
+    const post = ProxyState.posts.find(p => p.id == id)
     post.voteCount -= 1
     draw()
     console.log('button worked', post.voteCount)
 
-    if(post.voteCount <= -5){
-      document.getElementById(id).innerHTML = /*html*/ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-trash-alt"> ${post.voteCount}</i></p>`
+    if (post.voteCount <= -5) {
+      document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-trash-alt"> ${post.voteCount}</i></p>`
     }
-    if(post.voteCount <= -10){
-      document.getElementById(id).innerHTML = /*html*/ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-dumpster"> ${post.voteCount}</i></p>`
+    if (post.voteCount <= -10) {
+      document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-dumpster"> ${post.voteCount}</i></p>`
     }
-    if(post.voteCount <= -15){
-      document.getElementById(id).innerHTML = /*html*/ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-dumpster-fire"> ${post.voteCount}</i></p>`
+    if (post.voteCount <= -15) {
+      document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-dumpster-fire"> ${post.voteCount}</i></p>`
     }
   }
 }
