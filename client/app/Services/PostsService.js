@@ -2,7 +2,7 @@ import { ProxyState } from '../AppState.js'
 
 // eslint-disable-next-line no-undef
 const url = axios.create({
-  baseURL: 'http://localhost:3000/'
+  baseURL: 'http://localhost:3000/api/'
 })
 class PostsService {
   async getPosts() {

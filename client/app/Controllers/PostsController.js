@@ -45,16 +45,13 @@ export class PostsController {
       description: form.description.value,
       imgUrl: form.imgURL.value
     }
-    ProxyState.posts.push(formData)
-    ProxyState.posts = ProxyState.posts
-    // postsService.createPost(formData)
+    postsService.createPost(formData)
     form.reset()
   }
 
   upVote(id) {
     const post = ProxyState.posts.find(p => p.id === id)
     post.voteCount += 1
-    console.log('button worked', post.voteCount)
     draw()
     // document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-user-tie"> ${post.voteCount}</i></p>`
     if (post.voteCount >= 5) {
@@ -69,7 +66,6 @@ export class PostsController {
   downVote(id) {
     const post = ProxyState.posts.find(p => p.id === id)
     post.voteCount -= 1
-    console.log('button worked', post.voteCount)
     draw()
     if (post.voteCount <= -5) {
       document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-trash-alt"> ${post.voteCount}</i></p>`
