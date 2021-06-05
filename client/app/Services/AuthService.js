@@ -24,8 +24,9 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async() => {
   api.defaults.headers.authorization = AuthService.bearer
   api.interceptors.request.use(refreshAuthToken)
   ProxyState.user = AuthService.user
-  socketService.authenticate(AuthService.bearer)
   await accountService.getAccount()
+  // 10 POINTS TO TEAM Awkward Allstars
+  socketService.authenticate(AuthService.bearer)
 })
 
 async function refreshAuthToken(config) {
