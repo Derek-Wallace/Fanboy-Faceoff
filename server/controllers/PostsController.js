@@ -8,10 +8,10 @@ export class PostsController extends BaseController {
     super('api/posts')
     this.router
       .get('', this.getAll)
-      // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
-      .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:id', this.getPost)
       .get('/:postId/comments', this.getComments)
+      // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
+      .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.create)
       .delete('/:id', this.delete)
       .put('/:id', this.updatePost)
