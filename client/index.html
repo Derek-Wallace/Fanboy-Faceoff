@@ -94,6 +94,36 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="big-post" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form onsubmit="app.postsController.createPost(event)">
+              <div class="p-3 text-center">
+                <label for="title" class="sr-only">Title</label>
+                <input required type="text" name="title" id="title" class="border-top-0 border-right-0 border-left-0 bg-transparent" placeholder="Title">
+              </div>
+              <div class="p-3 text-center">
+                <label for="description" class="sr-only">Description</label>
+                <input type="text" name="description" id="description" class="border-top-0 border-right-0 border-left-0 bg-transparent" placeholder="Description">
+              </div>
+              <div class="p-3 mb-5 text-center">
+                <label for="imgURL" class="sr-only">Image</label>
+                <input type="text" name="imgURL" id="imgURL" class="border-top-0 border-right-0 border-left-0 bg-transparent" placeholder="Image URL">
+              </div>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#create">Save changes</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <button type="button" data-toggle="modal" data-target="#create"
       class="fab btn btn-dark rounded-pill py-3 px-5">Create Post</button>
   </main>
