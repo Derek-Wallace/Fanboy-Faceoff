@@ -6,6 +6,7 @@ class AppState extends EventEmitter {
   user = {}
   account = {}
   socketData = []
+  comments = []
 
   /** @type {Post[]} */
   posts = [{

@@ -98,27 +98,22 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"></h5>
+            <h5 class="modal-title" id="delete"><i role="button" onclick="app.postsController.deletePost(id)" class="fas fa-lg fa-trash-alt"></i></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <form onsubmit="app.postsController.createPost(event)">
+            <div id="post-body"></div>
+            <div id="comments"></div>
+          </div>
+          <div class="modal-footer" id="create-comment">
+            <form class="d-flex" onsubmit="app.commentsController.createComment(event, id)">
               <div class="p-3 text-center">
-                <label for="title" class="sr-only">Title</label>
-                <input required type="text" name="title" id="title" class="border-top-0 border-right-0 border-left-0 bg-transparent" placeholder="Title">
+                <label for="comment" class="sr-only">Comment</label>
+                <input type="text" name="comment" id="comment" class="border-top-0 border-right-0 border-left-0 bg-transparent" placeholder="Comment">
               </div>
-              <div class="p-3 text-center">
-                <label for="description" class="sr-only">Description</label>
-                <input type="text" name="description" id="description" class="border-top-0 border-right-0 border-left-0 bg-transparent" placeholder="Description">
-              </div>
-              <div class="p-3 mb-5 text-center">
-                <label for="imgURL" class="sr-only">Image</label>
-                <input type="text" name="imgURL" id="imgURL" class="border-top-0 border-right-0 border-left-0 bg-transparent" placeholder="Image URL">
-              </div>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#create">Save changes</button>
+              <button type="submit" class="btn btn-success">Submit Comment</button>
             </form>
           </div>
         </div>
