@@ -26,6 +26,31 @@ function draw() {
   document.getElementById('total-posts').innerHTML = ProxyState.posts.length
 }
 
+function drawIcon(id) {
+  const post = ProxyState.posts.find(p => p.id === id)
+  if (post.voteCount > -5 && post.voteCount < 5) {
+    document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-user-tie"> ${post.voteCount}</i></p>`
+  }
+  if (post.voteCount >= 5 && post.voteCount < 10) {
+    document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-mask"> ${post.voteCount}</i></p>`
+  }
+  if (post.voteCount >= 10 && post.voteCount < 15) {
+    document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-meteor"> ${post.voteCount}</i></p>`
+  }
+  if (post.voteCount >= 15) {
+    document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-dna"> ${post.voteCount}</i></p>`
+  }
+  if (post.voteCount <= -5 && post.voteCount > -10) {
+    document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-trash-alt"> ${post.voteCount}</i></p>`
+  }
+  if (post.voteCount <= -10 && post.voteCount > -15) {
+    document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-dumpster"> ${post.voteCount}</i></p>`
+  }
+  if (post.voteCount <= -15) {
+    document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-dumpster-fire"> ${post.voteCount}</i></p>`
+  }
+}
+
 export class PostsController {
   constructor() {
     ProxyState.on('posts', draw)
@@ -48,33 +73,13 @@ export class PostsController {
     form.reset()
   }
 
-  upVote(id) {
+  vote(id, choice) {
     const post = ProxyState.posts.find(p => p.id === id)
-    post.voteCount += 1
-    draw()
-    // document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-user-tie"> ${post.voteCount}</i></p>`
-    if (post.voteCount >= 5) {
-      document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-mask"> ${post.voteCount}</i></p>`
-    } if (post.voteCount >= 10) {
-      document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-meteor"> ${post.voteCount}</i></p>`
-    } if (post.voteCount >= 15) {
-      document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-superpowers"> ${post.voteCount}</i></p>`
+    if (choice === 'upvote') {
+      post.voteCount += 1
+    } else if (choice === 'downvote') {
+      post.voteCount -= 1
     }
-  }
-
-  downVote(id) {
-    const post = ProxyState.posts.find(p => p.id === id)
-    post.voteCount -= 1
-    draw()
-    if (post.voteCount <= -5) {
-      document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-trash-alt"> ${post.voteCount}</i></p>`
-    }
-    if (post.voteCount <= -10) {
-      document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-dumpster"> ${post.voteCount}</i></p>`
-    }
-    if (post.voteCount <= -15) {
-      document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-dumpster-fire"> ${post.voteCount}</i></p>`
-    }
-    // document.getElementById(id).innerHTML = /* html */ `<p class= "text-right" id="${post.id}"> <i class="fas fa-lg fa-user-tie"> ${post.voteCount}</i></p>`
+    drawIcon(id)
   }
 }
