@@ -1,18 +1,17 @@
 import { ProxyState } from '../AppState.js'
+import { api } from './AxiosService.js'
 
-// eslint-disable-next-line no-undef
-const url = axios.create({
-  baseURL: 'http://localhost:3000/api/'
-})
 class PostsService {
   async getPosts() {
-    const res = await url.get('posts')
-    ProxyState.posts.push(res.data)
+    const res = await api.get('posts')
+    ProxyState.posts = res.data
   }
 
   async createPost(formData) {
-    const res = await url.post('posts', formData)
+    const res = await api.post('posts', formData)
     ProxyState.posts.push(res.data)
+    // eslint-disable-next-line no-self-assign
+    ProxyState.posts = ProxyState.posts
   }
 }
 export const postsService = new PostsService()

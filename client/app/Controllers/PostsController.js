@@ -34,7 +34,6 @@ export class PostsController {
 
   getPosts() {
     postsService.getPosts()
-    draw()
   }
 
   createPost(event) {
